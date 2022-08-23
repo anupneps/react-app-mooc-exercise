@@ -1,14 +1,17 @@
 // React and JS exercise 
-
+import React from 'react'
 import "./App.css";
-import { useState } from "react";
+import {useState } from "react";
 
 // Buttton components
 const Button = (props) =>{
   return(
-  <button className="Btn" onClick={props.clickBtn}>
+
+<button className="Btn" onClick={props.clickBtn}>
     {props.text}
   </button>
+  
+  
 )
 
 }
@@ -61,38 +64,25 @@ const anecdotes = [
 
 //Setting a initial state to 0
 const [selected, setSelected] = useState(0)
-
 const random = Math.floor(Math.random()*anecdotes.length);
 
-
 // counting the votes for each anecdote that is clicked as vote -- creating a copy of anecdotes with vote count added
-const voteCount = [
-  {anec : anecdotes[0],
-  vote: 0
-  },
-  {anec : anecdotes[1],
-    vote: 0
-    },
-    {anec : anecdotes[2],
-      vote: 0
-      },
-      {anec : anecdotes[3],
-        vote: 0
-        },
-        {anec : anecdotes[4],
-          vote: 0
-          },
-          {anec : anecdotes[5],
-            vote: 0
-            },
-            {anec : anecdotes[6],
-              vote: 0
-              }
 
-]
+const [votes, setVotes] = useState([0,0,0,0,0,0,0])
 
-console.log(voteCount)
-const [votes, voteCounter] = useState(0)
+const randomAnecdotes = () => {
+  setSelected(random)
+}
+
+const voteCounter = () => {
+  const voteCount = [...votes]; // create a copy of votes[array] so that the state changed valued can be stored into it
+  voteCount[selected] += 1;
+  setVotes(voteCount);
+}
+
+const maxVote = Math.max(...votes);
+const index = votes.indexOf(maxVote);
+
 
 return ( 
 <div>
@@ -102,15 +92,13 @@ return (
 
 {anecdotes[selected]}
 
-{/* <Button clickBtn = {()=> setNewValue(random)} text = "Suffle" /> */}
-<Button clickBtn = {()=> setSelected(random)} text = "Suffle" />
-<Button clickBtn = {() => {
-  
-  voteCounter(voteCount[selected].vote = votes +1)
-  voteCount[selected].vote=votes
-}} text = "Vote" />
+    <Button clickBtn={randomAnecdotes} text="Suffle" />
+    <Button clickBtn={voteCounter} text="Vote" />
 
-<p> You have got {votes} votes </p>
+    <p> You have got {votes[selected]} votes </p>
+
+    <h2>The following anecdots has maximum no of votes i.e. {maxVote}</h2>
+    <p>{anecdotes[index]}</p>
 
 </div>
 

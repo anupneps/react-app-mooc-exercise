@@ -8,10 +8,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* justify-content: center; */
-    font-size: calc(10px + 2vmin);
+    font-size: 1rem;
     color: white;
-    padding: 10%;
+    padding: 2%;
+    padding-left: 10%;
 }
 
 td {
@@ -30,10 +30,18 @@ td {
     border-radius: 5px;
     padding: 5px;
     width: 100px;
+    cursor: pointer;
+}
+
+.Btn:hover {
+    background-color: #282c34;
+    color: white;
 }
 
 .Anecdotes {
     border: 1px solid grey;
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px;
+    align-items: center;
+    flex-wrap: wrap;
 }
